@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var gitHubApi = require('github');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+router.get('/getFollowers', function(req, res, next) {
+
+    var github = new gitHubApi({});
+
+    github.users.getFollowingForUser({
+        username: 'ajparedes10'
+    }, function(err, data) {
+        res.json(data);
+    });
 });
 
 module.exports = router;
