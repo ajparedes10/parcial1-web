@@ -35,12 +35,10 @@ class App extends Component {
             .then((res) => {
                 if(res.ok) return res.json();
             })
-            .then((followers)=>{
-                this.setState({
-                    search:'',
-                    followers: followers
-                });
-                console.log(followers);
+            .then(json => {
+                    this.setState({
+                        followers: json.data
+                    });
             });
 
     }
