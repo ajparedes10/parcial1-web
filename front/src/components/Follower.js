@@ -8,14 +8,12 @@ class Follower extends Component {
     handleClick(){
         this.props.onClick2(this.props.follower.login)
     }
-    renderButton(){
-        return (<button onClick={this.handleClick.bind(this)}>Ver Seguidores</button>);
-    }
+
     render(){
         return(
             <div>
                 <div>{this.props.follower.login}</div>
-                {this.renderButton()}
+                <button onClick={this.handleClick.bind(this)}>Ver Seguidores</button>
             </div>
         );
     }

@@ -21,13 +21,14 @@ class App extends Component {
             search: ''
         };
     }
+    // limpia el historial con la cadena de seguidores
     search(text){
         this.setState ({
             search: text,
             hist: [{searched: text}]
         });
     }
-
+    // agrega el siguiente seguidor a la cadena
     addHist(text){
         const newHist = this.state.hist;
         newHist.push({searched: text});
@@ -36,22 +37,36 @@ class App extends Component {
             hist: newHist
         });
     }
+    chain() {
+        let chain = '';
+        return this.state.hist.map((fActual, i) => {
+            return chain = ' -> ' + fActual.searched;
+        });
+        return <p>{chain}</p>;
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Buscador de seguidores de GitHub</h2>
-        </div>
-          <div className="App-intro">
-              <SearchBox search={this.search.bind(this)}/>
-              {console.log(this.state.hist)}
-              <FollowersList followers={this.state.followers} onClick1={this.addHist.bind(this)}/>
-          </div>
+    }
+    user= ()=>{
+        if(this.state.search !== ''){
+            return <p>El usuario {this.state.search} tiene los siguientes seguidores:</p>
+        }};
 
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <div className="App-header">
+                    <h2>Buscador de seguidores de GitHub</h2>
+                </div>
+                <div className="App-intro">
+                    <SearchBox search={this.search.bind(this)}/>
+                    {console.log(this.state.hist)}
+                    {this.chain()}
+                    {this.user()}
+                    <FollowersList followers={this.state.followers} onClick1={this.addHist.bind(this)}/>
+                </div>
+
+            </div>
+        );
+    }
 }
 
 export default App;

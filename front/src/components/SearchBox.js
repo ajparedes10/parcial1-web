@@ -15,8 +15,7 @@ class SearchBox extends Component{
     render(){
         return(
             <div>
-                <input type='text'
-                       placeholder='search user'
+                <input type='text' placeholder='buscar usuario'
                        onKeyPress={this.handleKeyPress.bind(this)}
                 />
             </div>
