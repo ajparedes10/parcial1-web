@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FollowersList from './components/FollowersList.js';
 import SearchBox from './components/SearchBox.js';
 import './App.css';
-import GoBack from "./components/GoBack";
 
 const URL ='http://localhost:8081';
 
@@ -13,6 +12,7 @@ class App extends Component {
         this.state={
             hist: [],
             followers: [],
+            histBusq: [],
             search: ''
         };
     }
@@ -28,6 +28,21 @@ class App extends Component {
                     followers: followers
                 });
             });
+    }
+    getHistorial(){
+        fetch(URL+'/getFollowers', {method:'GET',
+            headers: {accept:'application/json'}})
+            .then((res) => {
+                if(res.ok) return res.json();
+            })
+            .then((followers)=>{
+                this.setState({
+                    search:'',
+                    followers: followers
+                });
+                console.log(followers);
+            });
+
     }
     // limpia el historial de la cadena de seguidores
     search(text){
@@ -55,14 +70,23 @@ class App extends Component {
             return this.state.hist.map((fActual, i) => {
                 return chain = ' -> ' + fActual.searched;
             });
-            return <p>{chain}</p>;
+            return <p>{chain}</p>
         }
     }
+    //muestra el login del usuario actual
     user= ()=>{
         if(this.state.search !== ''){
-            return <p>El usuario {this.state.search} tiene los siguientes seguidores:</p>
+            return (
+                <div>
+                    <button onClick={this.getHistorial.bind(this)}>Ver Historial de Usuarios</button>
+                    <p>El usuario {this.state.search} tiene los siguientes seguidores:</p>
+                </div>
+            )
         }};
 
+    renderList(){
+        return <FollowersList followers={this.state.followers.data} onClick1={this.addHist.bind(this)}/>
+    }
     render() {
         return (
             <div className="App">
@@ -71,10 +95,9 @@ class App extends Component {
                 </div>
                 <div className="App-intro">
                     <SearchBox search={this.search.bind(this)}/>
-                    {console.log(this.state.hist)}
                     {this.chain()}
                     {this.user()}
-                    <FollowersList followers={this.state.followers.data} onClick1={this.addHist.bind(this)}/>
+                    {this.renderList()}
                 </div>
 
             </div>

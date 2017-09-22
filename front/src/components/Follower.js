@@ -11,8 +11,13 @@ class Follower extends Component {
 
     render(){
         return(
-            <div>
+            <div className="follower">
+                <a href={this.props.follower.html_url} target='_blank'>
+                    <img src={this.props.follower.avatar_url} alt={this.props.follower.login}/>
+                </a>
                 <div>{this.props.follower.login}</div>
+
+
                 <button onClick={this.handleClick.bind(this)}>Ver Seguidores</button>
             </div>
         );

@@ -5,7 +5,7 @@ class SearchBox extends Component{
         super(props);
     }
     handleKeyPress = (event) => {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
 
             this.props.search(event.target.value);
             console.log('enter press here! ');
