@@ -4,16 +4,20 @@ class SearchBox extends Component{
     constructor(props){
         super(props);
     }
+    handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
 
-    onEnter(event) {
-        this.props.search(event.target.value);
+            this.props.search(event.target.value);
+            console.log('enter press here! ');
+        }
     }
+
     render(){
         return(
             <div>
                 <input type='text'
-                       placeholder='search'
-                       onInput = {this.onEnter.bind(this)}
+                       placeholder='search user'
+                       onKeyPress={this.handleKeyPress.bind(this)}
                 />
             </div>
         )

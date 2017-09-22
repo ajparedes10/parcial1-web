@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FollowersList from './components/FollowersList.js';
 import SearchBox from './components/SearchBox.js';
 import './App.css';
-import Follower from "./components/Follower";
 
 const URL ='http://localhost:8081';
 
@@ -11,6 +10,7 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state={
+            hist: [],
             followers: [
                 {login: 'user1'},
                 {login: 'user2'},
@@ -23,7 +23,17 @@ class App extends Component {
     }
     search(text){
         this.setState ({
-            search: text
+            search: text,
+            hist: [{searched: text}]
+        });
+    }
+
+    addHist(text){
+        const newHist = this.state.hist;
+        newHist.push({searched: text});
+        this.setState ({
+            search: text,
+            hist: newHist
         });
     }
 
@@ -33,9 +43,10 @@ class App extends Component {
         <div className="App-header">
           <h2>Buscador de seguidores de GitHub</h2>
         </div>
-          <div>
+          <div className="App-intro">
               <SearchBox search={this.search.bind(this)}/>
-              <FollowersList followers={this.state.followers}/>
+              {console.log(this.state.hist)}
+              <FollowersList followers={this.state.followers} onClick1={this.addHist.bind(this)}/>
           </div>
 
       </div>

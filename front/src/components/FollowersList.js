@@ -9,7 +9,9 @@ class FollowersList extends Component {
 
     renderFollowers() {
         return this.props.followers.map( (fActual,i) => {
-            return <Follower follower = {fActual} key={i}/>
+            return (
+                <Follower follower = {fActual} key={i} onClick2={this.props.onClick1}/>
+                )
         });
     }
 
@@ -23,7 +25,8 @@ class FollowersList extends Component {
 }
 
 FollowersList.propTypes = {
-    followers: PropTypes.array.isRequired
+    followers: PropTypes.array.isRequired,
+    onClick1: PropTypes.func.isRequired
 };
 
 export default FollowersList;
