@@ -7,8 +7,8 @@ router.get('/getFollowers', function(req, res, next) {
 
     var github = new gitHubApi({});
 
-    github.users.getFollowingForUser({
-        username: 'ajparedes10'
+    github.users.getFollowersForUser({
+        username: 'john-guerra'
     }, function(err, data) {
         res.json(data);
     });

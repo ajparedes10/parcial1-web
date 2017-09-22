@@ -1,18 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import FollowersList from './components/FollowersList.js';
+import SearchBox from './components/SearchBox.js';
 import './App.css';
+import Follower from "./components/Follower";
+
+const URL ='http://localhost:8081';
 
 class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            followers: [
+                {login: 'user1'},
+                {login: 'user2'},
+                {login: 'user3'},
+                {login: 'user4'},
+                {login: 'user5'}
+            ],
+            search: ''
+        };
+    }
+    search(text){
+        this.setState ({
+            search: text
+        });
+    }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Buscador de seguidores de GitHub</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+          <div>
+              <SearchBox search={this.search.bind(this)}/>
+              <FollowersList followers={this.state.followers}/>
+          </div>
+
       </div>
     );
   }
