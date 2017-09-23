@@ -3,7 +3,7 @@ import FollowersList from './components/FollowersList.js';
 import SearchBox from './components/SearchBox.js';
 import './App.css';
 
-const URL ='http://localhost:8081';
+const URL ='https://pacial1-web.herokuapp.com';
 
 class App extends Component {
 
